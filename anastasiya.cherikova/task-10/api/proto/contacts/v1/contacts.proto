@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package contacts.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "task-10/pkg/api/contacts/v1;contactsv1";
+
+// ContactsService is a service for managing phone contacts.
+service ContactsService {
+  // CreateContact creates a new contact.
+  rpc CreateContact(CreateContactRequest) returns (CreateContactResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/contacts"
+      body: "*"
+    };
+  }
+
+  // GetContact retrieves a contact by ID.
+  rpc GetContact(GetContactRequest) returns (GetContactResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/contacts/{id}"
+    };
+  }
+
+  // ListContacts retrieves all contacts.
+  rpc ListContacts(ListContactsRequest) returns (ListContactsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/contacts"
+    };
+  }
+
+  // UpdateContact updates an existing contact.
+  rpc UpdateContact(UpdateContactRequest) returns (UpdateContactResponse) {
+    option (google.api.http) = {
+      put: "/api/v1/contacts/{contact.id}"
+      body: "*"
+    };
+  }
+
+  // DeleteContact deletes a contact by ID.
+  rpc DeleteContact(DeleteContactRequest) returns (DeleteContactResponse) {
+    option (google.api.http) = {
+      delete: "/api/v1/contacts/{id}"
+    };
+  }
+}
+
+// Contact represents a phone contact.
+message Contact {
+  // Unique identifier of the contact.
+  string id = 1;
+  
+  // First name of the contact.
+  string first_name = 2;
+  
+  // Last name of the contact.
+  string last_name = 3;
+  
+  // Phone number of the contact.
+  string phone_number = 4;
+  
+  // Email of the contact.
+  string email = 5;
+}
+
+// CreateContactRequest is a request to create a new contact.
+message CreateContactRequest {
+  // Contact information to create.
+  Contact contact = 1;
+}
+
+// CreateContactResponse is a response to CreateContactRequest.
+message CreateContactResponse {
+  // Created contact.
+  Contact contact = 1;
+}
+
+// GetContactRequest is a request to retrieve a contact by ID.
+message GetContactRequest {
+  // ID of the contact to retrieve.
+  string id = 1;
+}
+
+// GetContactResponse is a response to GetContactRequest.
+message GetContactResponse {
+  // Retrieved contact.
+  Contact contact = 1;
+}
+
+// ListContactsRequest is a request to retrieve all contacts.
+message ListContactsRequest {}
+
+// ListContactsResponse is a response to ListContactsRequest.
+message ListContactsResponse {
+  // List of retrieved contacts.
+  repeated Contact contacts = 1;
+}
+
+// UpdateContactRequest is a request to update an existing contact.
+message UpdateContactRequest {
+  // Contact information to update.
+  Contact contact = 1;
+}
+
+// UpdateContactResponse is a response to UpdateContactRequest.
+message UpdateContactResponse {
+  // Updated contact.
+  Contact contact = 1;
+}
+
+// DeleteContactRequest is a request to delete a contact by ID.
+message DeleteContactRequest {
+  // ID of the contact to delete.
+  string id = 1;
+}
+
+// DeleteContactResponse is a response to DeleteContactRequest.
+message DeleteContactResponse {
+  // Success flag.
+  bool success = 1;
+}

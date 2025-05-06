@@ -1,0 +1,326 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "contacts/v1/contacts.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ContactsService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/contacts": {
+      "get": {
+        "summary": "ListContacts retrieves all contacts.",
+        "operationId": "ContactsService_ListContacts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListContactsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "ContactsService"
+        ]
+      },
+      "post": {
+        "summary": "CreateContact creates a new contact.",
+        "operationId": "ContactsService_CreateContact",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateContactResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "CreateContactRequest is a request to create a new contact.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateContactRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ContactsService"
+        ]
+      }
+    },
+    "/api/v1/contacts/{contact.id}": {
+      "put": {
+        "summary": "UpdateContact updates an existing contact.",
+        "operationId": "ContactsService_UpdateContact",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateContactResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "contact.id",
+            "description": "Unique identifier of the contact.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContactsServiceUpdateContactBody"
+            }
+          }
+        ],
+        "tags": [
+          "ContactsService"
+        ]
+      }
+    },
+    "/api/v1/contacts/{id}": {
+      "get": {
+        "summary": "GetContact retrieves a contact by ID.",
+        "operationId": "ContactsService_GetContact",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetContactResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "ID of the contact to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ContactsService"
+        ]
+      },
+      "delete": {
+        "summary": "DeleteContact deletes a contact by ID.",
+        "operationId": "ContactsService_DeleteContact",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteContactResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "ID of the contact to delete.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ContactsService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ContactsServiceUpdateContactBody": {
+      "type": "object",
+      "properties": {
+        "contact": {
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "description": "First name of the contact."
+            },
+            "lastName": {
+              "type": "string",
+              "description": "Last name of the contact."
+            },
+            "phoneNumber": {
+              "type": "string",
+              "description": "Phone number of the contact."
+            },
+            "email": {
+              "type": "string",
+              "description": "Email of the contact."
+            }
+          },
+          "description": "Contact information to update.",
+          "title": "Contact information to update."
+        }
+      },
+      "description": "UpdateContactRequest is a request to update an existing contact."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1Contact": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the contact."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name of the contact."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the contact."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number of the contact."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email of the contact."
+        }
+      },
+      "description": "Contact represents a phone contact."
+    },
+    "v1CreateContactRequest": {
+      "type": "object",
+      "properties": {
+        "contact": {
+          "$ref": "#/definitions/v1Contact",
+          "description": "Contact information to create."
+        }
+      },
+      "description": "CreateContactRequest is a request to create a new contact."
+    },
+    "v1CreateContactResponse": {
+      "type": "object",
+      "properties": {
+        "contact": {
+          "$ref": "#/definitions/v1Contact",
+          "description": "Created contact."
+        }
+      },
+      "description": "CreateContactResponse is a response to CreateContactRequest."
+    },
+    "v1DeleteContactResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "description": "Success flag."
+        }
+      },
+      "description": "DeleteContactResponse is a response to DeleteContactRequest."
+    },
+    "v1GetContactResponse": {
+      "type": "object",
+      "properties": {
+        "contact": {
+          "$ref": "#/definitions/v1Contact",
+          "description": "Retrieved contact."
+        }
+      },
+      "description": "GetContactResponse is a response to GetContactRequest."
+    },
+    "v1ListContactsResponse": {
+      "type": "object",
+      "properties": {
+        "contacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Contact"
+          },
+          "description": "List of retrieved contacts."
+        }
+      },
+      "description": "ListContactsResponse is a response to ListContactsRequest."
+    },
+    "v1UpdateContactResponse": {
+      "type": "object",
+      "properties": {
+        "contact": {
+          "$ref": "#/definitions/v1Contact",
+          "description": "Updated contact."
+        }
+      },
+      "description": "UpdateContactResponse is a response to UpdateContactRequest."
+    }
+  }
+}
